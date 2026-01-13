@@ -268,3 +268,36 @@ document
 document.getElementById("modalOverlay").addEventListener("click", (e) => {
   if (e.target === document.getElementById("modalOverlay")) toggleModal(false);
 });
+
+// Hamburger Menu Toggle
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    navMenu.classList.toggle("active");
+  });
+
+  // Close menu when clicking on a nav link
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navMenu.classList.contains("active")) {
+        menuToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+      }
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      navMenu.classList.contains("active") &&
+      !navMenu.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      menuToggle.classList.remove("active");
+      navMenu.classList.remove("active");
+    }
+  });
+}
